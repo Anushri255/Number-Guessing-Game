@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,13 +37,14 @@
         <input type="number" id="guessInput" placeholder="Enter your guess" />
         <button onclick="checkGuess()">Submit Guess</button>
         <button onclick="resetGame()">Reset Game</button>
+        <div id="attempts" class="feedback"></div>
         <div id="feedback" class="feedback"></div>
     </div>
-</body>
-   <script>
+    <script>
         let minRange = 1;
         let maxRange = 100;
         let targetNumber = generateRandomNumber(minRange, maxRange);
+        let attempts = 0; // Initialize attempts counter
         
         function generateRandomNumber(min, max) {
             return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -53,8 +53,11 @@
         function checkGuess() {
             const guessInput = document.getElementById('guessInput');
             const feedback = document.getElementById('feedback');
+            const attemptsDiv = document.getElementById('attempts');
             const guess = Number(guessInput.value);
 
+            attempts++; 
+            
             if (isNaN(guess) || guess < minRange || guess > maxRange) {
                 feedback.textContent = `Please enter a number between ${minRange} and ${maxRange}.`;
                 feedback.style.color = 'red';
@@ -68,16 +71,20 @@
                 feedback.textContent = 'Too high! Try again.';
                 feedback.style.color = 'orange';
             } else {
-                feedback.textContent = 'Congratulations! You guessed the number!';
+                feedback.textContent = `Congratulations! You guessed the number in ${attempts} tries!`;
                 feedback.style.color = 'green';
             }
+
+            attemptsDiv.textContent = `Attempts: ${attempts}`; // Display attempts
         }
 
         function resetGame() {
             targetNumber = generateRandomNumber(minRange, maxRange);
+            attempts = 0; // Reset attempts counter
             document.getElementById('guessInput').value = '';
             document.getElementById('feedback').textContent = '';
+            document.getElementById('attempts').textContent = ''; // Clear attempts display
         }
     </script>
-
+</body>
 </html>
