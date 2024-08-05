@@ -1,1 +1,17 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Number Guessing Game</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Number Guessing Game</h1>
+        <p>Guess a number between <span id="minRange">1</span> and <span id="maxRange">100</span></p>
+        <input type="number" id="guessInput" placeholder="Enter your guess" />
+        <button onclick="checkGuess()">Submit Guess</button>
+        <button onclick="resetGame()">Reset Game</button>
+        <div id="feedback" class="feedback"></div>
+    </div>
+</body>
+</html>
